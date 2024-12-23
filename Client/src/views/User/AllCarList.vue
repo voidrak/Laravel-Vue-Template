@@ -37,9 +37,10 @@ const filters = [
     id: 'color',
     name: 'Color',
     options: [
+      { value: 'All', label: 'ALL', checked: true },
       { value: 'white', label: 'White', checked: false },
       { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
+      { value: 'blue', label: 'Blue', checked: false },
       { value: 'brown', label: 'Brown', checked: false },
       { value: 'green', label: 'Green', checked: false },
       { value: 'purple', label: 'Purple', checked: false },
@@ -49,9 +50,12 @@ const filters = [
     id: 'category',
     name: 'Category',
     options: [
+      { value: 'All', label: 'ALL', checked: true },
       { value: 'new-arrivals', label: 'New Arrivals', checked: false },
+
+
       { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
+      { value: 'travel', label: 'Travel', checked: false },
       { value: 'organization', label: 'Organization', checked: false },
       { value: 'accessories', label: 'Accessories', checked: false },
     ],
@@ -79,7 +83,7 @@ const mobileFiltersOpen = ref(false)
 
 
         <main class="mx-auto  px-4 sm:px-6 lg:px-8">
-          <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+          <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
             <h1 class="text-4xl font-bold tracking-tight text-gray-900">Filter</h1>
 
             <div class="flex items-center">
@@ -113,12 +117,12 @@ const mobileFiltersOpen = ref(false)
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" class="pb-24 pt-6">
-            <h2 id="products-heading" class="sr-only">Products</h2>
+          <section aria-labelledby="products-heading" class="pb-24  pt-6">
 
-            <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+
+            <div class="grid  grid-cols-1 gap-x-8  gap-y-10 lg:grid-cols-4">
               <!-- Filters -->
-              <form class="hidden lg:block">
+              <form class="  lg:block border-r border-gray-200  ">
                 <h3 class="sr-only">Categories</h3>
                 <ul role="list" class="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
                   <li v-for="category in subCategories" :key="category.name">
@@ -143,9 +147,9 @@ const mobileFiltersOpen = ref(false)
                       <div v-for="(option, optionIdx) in section.options" :key="option.value" class="flex gap-3">
                         <div class="flex h-5 shrink-0 items-center">
                           <div class="group grid size-4 grid-cols-1">
-                            <input :id="`filter-${section.id}-${optionIdx}`" :name="`${section.id}[]`"
-                              :value="option.value" type="checkbox" :checked="option.checked"
-                              class="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
+                            <input :id="`filter-${section.id}-${optionIdx}`" :name="`${section.id}`"
+                              :value="option.value" type="radio" :checked="option.checked"
+                              class="col-start-1 row-start-1 appearance-none rounded-full border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
                             <svg
                               class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
                               viewBox="0 0 14 14" fill="none">
@@ -232,7 +236,7 @@ const mobileFiltersOpen = ref(false)
                             <span class="mr-2 ml-3 rounded bg-pr-300 px-2.5 py-0.5 text-xs font-semibold">4.5</span>
                           </div>
                         </div>
-                        <a href=" #"
+                        <RouterLink :to="{ name: 'ReserveCar' }"
                           class="flex items-center justify-center rounded-md bg-black hover:bg-orange px-5 py-2.5 text-center text-sm font-medium text-white  focus:outline-none focus:ring-4 focus:ring-blue-300">
                           <svg id="thisicon" class="mr-4 h-6 w-6 fill-white" xmlns="http://www.w3.org/2000/svg"
                             height="1em" viewBox="0 0 512 512">
@@ -241,7 +245,8 @@ const mobileFiltersOpen = ref(false)
                             <path
                               d="M184 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H96c-35.3 0-64 28.7-64 64v16 48V448c0 35.3 28.7 64 64 64H416c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H376V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H184V24zM80 192H432V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V192zm176 40c-13.3 0-24 10.7-24 24v48H184c-13.3 0-24 10.7-24 24s10.7 24 24 24h48v48c0 13.3 10.7 24 24 24s24-10.7 24-24V352h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H280V256c0-13.3-10.7-24-24-24z" />
                           </svg>
-                          Reserve</a>
+                          Reserve
+                        </RouterLink>
                       </div>
                     </div>
                     <div
@@ -273,7 +278,7 @@ const mobileFiltersOpen = ref(false)
                             <span class="mr-2 ml-3 rounded bg-pr-300 px-2.5 py-0.5 text-xs font-semibold">4.5</span>
                           </div>
                         </div>
-                        <a href=" #"
+                        <RouterLink :to="{ name: 'ReserveCar' }"
                           class="flex items-center justify-center rounded-md bg-black hover:bg-orange px-5 py-2.5 text-center text-sm font-medium text-white  focus:outline-none focus:ring-4 focus:ring-blue-300">
                           <svg id="thisicon" class="mr-4 h-6 w-6 fill-white" xmlns="http://www.w3.org/2000/svg"
                             height="1em" viewBox="0 0 512 512">
@@ -282,7 +287,8 @@ const mobileFiltersOpen = ref(false)
                             <path
                               d="M184 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H96c-35.3 0-64 28.7-64 64v16 48V448c0 35.3 28.7 64 64 64H416c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H376V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H184V24zM80 192H432V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V192zm176 40c-13.3 0-24 10.7-24 24v48H184c-13.3 0-24 10.7-24 24s10.7 24 24 24h48v48c0 13.3 10.7 24 24 24s24-10.7 24-24V352h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H280V256c0-13.3-10.7-24-24-24z" />
                           </svg>
-                          Reserve</a>
+                          Reserve
+                        </RouterLink>
                       </div>
                     </div>
                     <div
@@ -314,7 +320,7 @@ const mobileFiltersOpen = ref(false)
                             <span class="mr-2 ml-3 rounded bg-pr-300 px-2.5 py-0.5 text-xs font-semibold">4.5</span>
                           </div>
                         </div>
-                        <a href=" #"
+                        <RouterLink :to="{ name: 'ReserveCar' }"
                           class="flex items-center justify-center rounded-md bg-black hover:bg-orange px-5 py-2.5 text-center text-sm font-medium text-white  focus:outline-none focus:ring-4 focus:ring-blue-300">
                           <svg id="thisicon" class="mr-4 h-6 w-6 fill-white" xmlns="http://www.w3.org/2000/svg"
                             height="1em" viewBox="0 0 512 512">
@@ -323,7 +329,8 @@ const mobileFiltersOpen = ref(false)
                             <path
                               d="M184 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H96c-35.3 0-64 28.7-64 64v16 48V448c0 35.3 28.7 64 64 64H416c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H376V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H184V24zM80 192H432V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V192zm176 40c-13.3 0-24 10.7-24 24v48H184c-13.3 0-24 10.7-24 24s10.7 24 24 24h48v48c0 13.3 10.7 24 24 24s24-10.7 24-24V352h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H280V256c0-13.3-10.7-24-24-24z" />
                           </svg>
-                          Reserve</a>
+                          Reserve
+                        </RouterLink>
                       </div>
                     </div>
                     <div
@@ -355,7 +362,7 @@ const mobileFiltersOpen = ref(false)
                             <span class="mr-2 ml-3 rounded bg-pr-300 px-2.5 py-0.5 text-xs font-semibold">4.5</span>
                           </div>
                         </div>
-                        <a href=" #"
+                        <RouterLink :to="{ name: 'ReserveCar' }"
                           class="flex items-center justify-center rounded-md bg-black hover:bg-orange px-5 py-2.5 text-center text-sm font-medium text-white  focus:outline-none focus:ring-4 focus:ring-blue-300">
                           <svg id="thisicon" class="mr-4 h-6 w-6 fill-white" xmlns="http://www.w3.org/2000/svg"
                             height="1em" viewBox="0 0 512 512">
@@ -364,7 +371,8 @@ const mobileFiltersOpen = ref(false)
                             <path
                               d="M184 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H96c-35.3 0-64 28.7-64 64v16 48V448c0 35.3 28.7 64 64 64H416c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H376V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H184V24zM80 192H432V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V192zm176 40c-13.3 0-24 10.7-24 24v48H184c-13.3 0-24 10.7-24 24s10.7 24 24 24h48v48c0 13.3 10.7 24 24 24s24-10.7 24-24V352h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H280V256c0-13.3-10.7-24-24-24z" />
                           </svg>
-                          Reserve</a>
+                          Reserve
+                        </RouterLink>
                       </div>
                     </div>
                     <div
@@ -396,7 +404,7 @@ const mobileFiltersOpen = ref(false)
                             <span class="mr-2 ml-3 rounded bg-pr-300 px-2.5 py-0.5 text-xs font-semibold">4.5</span>
                           </div>
                         </div>
-                        <a href=" #"
+                        <RouterLink :to="{ name: 'ReserveCar' }"
                           class="flex items-center justify-center rounded-md bg-black hover:bg-orange px-5 py-2.5 text-center text-sm font-medium text-white  focus:outline-none focus:ring-4 focus:ring-blue-300">
                           <svg id="thisicon" class="mr-4 h-6 w-6 fill-white" xmlns="http://www.w3.org/2000/svg"
                             height="1em" viewBox="0 0 512 512">
@@ -405,7 +413,8 @@ const mobileFiltersOpen = ref(false)
                             <path
                               d="M184 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H96c-35.3 0-64 28.7-64 64v16 48V448c0 35.3 28.7 64 64 64H416c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H376V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H184V24zM80 192H432V448c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V192zm176 40c-13.3 0-24 10.7-24 24v48H184c-13.3 0-24 10.7-24 24s10.7 24 24 24h48v48c0 13.3 10.7 24 24 24s24-10.7 24-24V352h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H280V256c0-13.3-10.7-24-24-24z" />
                           </svg>
-                          Reserve</a>
+                          Reserve
+                        </RouterLink>
                       </div>
                     </div>
                   </div>
