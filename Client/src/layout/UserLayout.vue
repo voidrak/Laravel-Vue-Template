@@ -1,10 +1,9 @@
 <script setup>
 
-import Heading from '@/components/User/Heading.vue';
 </script>
 
 <template>
 
-  <Heading />
+  <h1 class="">User Layout</h1>
   <slot></slot>
 </template>
